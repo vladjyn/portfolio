@@ -432,8 +432,8 @@
             
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
+            gap: 0;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.15);
             color: white;
             text-decoration: none;
@@ -442,6 +442,10 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             font-size: 0.95rem;
             backdrop-filter: blur(4px);
+
+            overflow: hidden;  /* Cache le texte qui dépasse */
+            width: 44px;  /* Largeur du carré (icône + padding) */
+            transition: all 0.4s ease;
         }
 
         .project-card:hover .github-btn {
@@ -451,6 +455,9 @@
         }
 
         .github-btn:hover {
+            width: auto;  /* S'étend au survol */
+            gap: 10px;  /* Espace entre icône et texte */
+            padding: 12px 24px;  /* Padding complet */
             background: white;
             color: var(--primary-mauve);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -460,6 +467,21 @@
         .github-icon {
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Cache le texte initialement */
+        .github-btn span {
+            white-space: nowrap;
+            opacity: 0;
+            width: 0;
+            transition: all 0.4s ease;
+        }
+
+        /* Affiche le texte au survol */
+        .github-btn:hover span {
+            opacity: 1;
+            width: auto;
         }
 
         .carousel-arrow {
